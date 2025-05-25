@@ -12,7 +12,7 @@ from statsmodels.stats.outliers_influence import variance_inflation_factor
 from statsmodels.tools.tools import add_constant
 from ydata_profiling import ProfileReport
 
-# 1️⃣ تحديد الأعمدة الرقمية
+#1️ تحديد الأعمدة الرقمية
 def get_numeric_columns(df):
     """
     استخراج أسماء الأعمدة الرقمية فقط من الجدول.
@@ -22,7 +22,7 @@ def get_numeric_columns(df):
     return df.select_dtypes(include='number').columns.tolist()
 
 
-# 2️⃣ تحليل Skew و Kurtosis
+# 2️ تحليل Skew و Kurtosis
 def check_skew_kurtosis(df):
     """
     فحص الانحراف المعياري والتفلطح (لتحديد التوزيع الطبيعي).
@@ -34,7 +34,7 @@ def check_skew_kurtosis(df):
     print(df.kurt(numeric_only=True))
 
 
-# 3️⃣ رسم علاقات ثنائية بين المتغيرات (مع تلوين حسب الفئة)
+# 3️ رسم علاقات ثنائية بين المتغيرات (مع تلوين حسب الفئة)
 def plot_pairwise_with_target(df, target):
     """
     رسم pairplot بين كل المتغيرات الرقمية وتلوينها حسب target.
@@ -45,7 +45,7 @@ def plot_pairwise_with_target(df, target):
     plt.show()
 
 
-# 4️⃣ Boxplot بين عمود تصنيفي وعمود رقمي
+# 4️ Boxplot بين عمود تصنيفي وعمود رقمي
 def boxplot_categorical_vs_numeric(df, cat_col, num_col):
     """
     رسم Boxplot للمقارنة بين فئة تصنيفية وعمود رقمي.
@@ -58,7 +58,7 @@ def boxplot_categorical_vs_numeric(df, cat_col, num_col):
     plt.show()
 
 
-# 5️⃣ فحص تعدد الارتباط Multicollinearity باستخدام VIF
+# 5️ فحص تعدد الارتباط Multicollinearity باستخدام VIF
 def calculate_vif(df):
     """
     حساب VIF لكشف التكرار القوي بين الأعمدة (Multicollinearity).
@@ -73,7 +73,7 @@ def calculate_vif(df):
     return vif_df
 
 
-# 6️⃣ نسبة القيم الفريدة في كل عمود
+# 6️ نسبة القيم الفريدة في كل عمود
 def unique_ratio(df):
     """
     فحص نسبة القيم الفريدة إلى عدد الصفوف — يفيد في كشف الأعمدة الغير مفيدة.
@@ -86,7 +86,7 @@ def unique_ratio(df):
         print(f"{col}: {ratio:.2%}")
 
 
-# 7️⃣ ارتباط كل عمود رقمي بالهدف
+# 7️ ارتباط كل عمود رقمي بالهدف
 def correlation_with_target(df, target_col):
     """
     حساب الارتباط بين الأعمدة الرقمية وعمود الهدف.
@@ -99,7 +99,7 @@ def correlation_with_target(df, target_col):
     print(corr.abs().sort_values(ascending=False))
 
 
-# 8️⃣ heatmap متقدّم عن طريق cluster analysis
+# 8️ heatmap متقدّم عن طريق cluster analysis
 def cluster_correlation(df):
     """
     رسم Clustermap لعلاقات الأعمدة الرقمية بشكل عنقودي.
@@ -112,7 +112,7 @@ def cluster_correlation(df):
     plt.show()
 
 
-# 9️⃣ توليد تقرير تفاعلي كامل باستخدام ydata_profiling
+# 9️ توليد تقرير تفاعلي كامل باستخدام ydata_profiling
 def generate_profile(df, output_file='eda_report.html'):
     """
     إنشاء تقرير شامل تلقائي باستخدام ydata_profiling.
@@ -125,7 +125,7 @@ def generate_profile(df, output_file='eda_report.html'):
     profile.to_file(output_file)
 
 
-# 🔟 كشف الأعمدة التي تحتوي على أنواع مختلفة داخلها
+# 10 كشف الأعمدة التي تحتوي على أنواع مختلفة داخلها
 def check_mixed_types(df):
     """
     فحص الأعمدة التي تحتوي على أنواع بيانات مختلفة (مثل أرقام + نصوص).
