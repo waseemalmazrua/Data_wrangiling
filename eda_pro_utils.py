@@ -137,3 +137,16 @@ def check_mixed_types(df):
         unique_types = df[col].dropna().map(type).nunique()
         if unique_types > 1:
             print(f"⚠️ Column '{col}' has mixed data types")
+
+
+# 11. Detect outliers using IQR
+def detect_outliers_iqr(df, threshold=1.5):
+    outliers = {}
+    for col in df.select_dtypes(include="number").columns:
+        Q1 = df[col].quantile(0.25)
+        Q3 = df[col].quantile(0.75)
+        IQR = Q3 - Q1
+        mask = (df[col] < Q1 - threshold * IQR) | (df[col] > Q3 + threshold * IQR)
+        outliers[col] = df[col][mask]
+        print(f"{col}: {mask.sum()} outliers")
+    return outliers
