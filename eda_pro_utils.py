@@ -62,16 +62,17 @@ def boxplot_categorical_vs_numeric(df, cat_col, num_col):
 def calculate_vif(df):
     """
     حساب VIF لكشف التكرار القوي بين الأعمدة (Multicollinearity).
-    مناسب قبل بناء نماذج الانحدار.
-    مثال:
-        calculate_vif(df)
+    ترجع النتائج مرتبة من الأعلى للأقل حسب VIF.
     """
     X = add_constant(df.select_dtypes(include='number').dropna())
     vif_df = pd.DataFrame()
     vif_df["feature"] = X.columns
     vif_df["VIF"] = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
+    
+    #  ترتيب النتائج من الأعلى إلى الأقل
+    vif_df = vif_df.sort_values(by="VIF", ascending=False).reset_index(drop=True)
+    
     return vif_df
-
 
 # 6️ نسبة القيم الفريدة في كل عمود
 def unique_ratio(df):
