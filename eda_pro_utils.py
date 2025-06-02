@@ -59,6 +59,9 @@ def boxplot_categorical_vs_numeric(df, cat_col, num_col):
 
 
 # 5️ فحص تعدد الارتباط Multicollinearity باستخدام VIF
+from statsmodels.tools.tools import add_constant
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+
 def calculate_vif(df):
     """
     حساب VIF لكشف التكرار القوي بين الأعمدة (Multicollinearity).
