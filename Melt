@@ -1,0 +1,16 @@
+def melt_dataframe(df, id_vars, value_vars, var_name="variable", value_name="value"):
+    """
+    تقوم بتحويل بيانات من الشكل العريض (wide) إلى الشكل الطويل (long) باستخدام دالة melt.
+    
+    Parameters:
+    - df (DataFrame): جدول البيانات الأصلي.
+    - id_vars (list): الأعمدة التي تريد الاحتفاظ بها كما هي (مثل السنوات أو أسماء الأشخاص).
+    - value_vars (list): الأعمدة التي تريد تحويلها إلى صفوف.
+    - var_name (str): اسم العمود الجديد الذي يمثل أسماء الأعمدة السابقة.
+    - value_name (str): اسم العمود الجديد الذي يمثل القيم.
+
+    Returns:
+    - DataFrame: جدول طويل جاهز للتحليل أو الرسم.
+    """
+    return df.melt(id_vars=id_vars, value_vars=value_vars,
+                   var_name=var_name, value_name=value_name)
